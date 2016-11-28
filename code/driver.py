@@ -5,6 +5,9 @@ from pytesseract import image_to_string
 from g_translate import translate
 import codecs
 
+if len(sys.argv) < 2:
+    print("Usage: Too few arguments! You need to specify at least the target image file.")
+    sys.exit(0)
 IMG_PREFIX = (sys.argv[1]).split(".")[0]
 DEST = [sys.argv[i] for i in range(2, len(sys.argv))]
 LANGUAGES = {"en": "English", "fr": "French", "es": "Spanish", "ko": "Korean", \
