@@ -1,0 +1,39 @@
+" ‘ jot—INS HOPKINS
+. WHITING SCHOOL ‘
+ofENCINISERINo-
+
+ 
+
+Final Project
+ComputerVision, EN. 600.461/661
+‘ ProfeSSOrAustinReiter
+Fall 2016
+
+This course will have a final project component to‘it; iThe'best wayto learn co’mputerVision isto do'
+computervision.Solet’sdojustthat! ‘ ' ' '
+
+Overview: .
+
+The final projectwill makeup 35% of yourfinal grade,‘and willrconsist of: a project proposal write-up
+(due: 10/20/16), an in-class poster presentationlwill take place during final class period on 12/08/16, . ‘
+
+moo-1:15 pm); and a final report (dUezon 12/08/16 ~ N0 EXCEPWQNS 3)
+
+You may‘work in teams, up to 4 people (no more thanv4 people unless otherwise approved by me), and
+. ifyou' d ratherwork alone that’s allowed Your project IS designed to be open- -,ended but it must be
+approved by me and the TAs In the project proposal stage. Ifyou are working In a team, I have higher
+
+expectations that those who choose to work alone! Please come talk to me ifyou’ re unsure ifyour
+projectis acceptable. ldon’twant itto be too easy, and l don’twantit to be too hard. The pointis to
+
+get some good hands-on computervision experiencewith’an actual project using the concepts we learn
+throughoutthe semester. Students in 461 and 661 can work as a team but 661 projects will have higher
+expectations. / ‘ ’ '
+
+Programming‘Language:
+
+You may use any programminglanguage you want here (e. g., MATLAB, C, CH, Jaya, Python etc), You
+may also use the Image ProcessingToolbox provided by MATLAB as well openly availabletoolkits on the
+
+web. I WIll suggest OpenCV as a great toolbox as well as Pomt Clouds Library (PCL) ifyou are dealing
+with 3D data. " 
