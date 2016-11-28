@@ -24,9 +24,13 @@ def threshold_image():
 
 def extract_text():
     raw_text = image_to_string(Image.open(IMG_PREFIX + '_thresh.png'))
+    no_new_line_text = ""
+    for char in raw_text:
+        if char is not "\n":
+            no_new_line_text += char
     text = raw_text.split(" ")
     print("Total of " + str(len(text)) + " words detected.")
-    return raw_text, text
+    return raw_text, text, no_new_line_text
 
 def write_original_output(text):
     with open(IMG_PREFIX + '_output_text.txt', 'w') as writer:
@@ -39,12 +43,12 @@ def write_original_output(text):
 
 def write_translated_output(raw_text, src):
     for dest_lang in DEST:
-        translated = translate(raw_text, dest_lang, "auto").decode('utf-8')
+        translated = translate(raw_text, dest_lang, src).decode('utf-8')
         try:
-            codecs.open(IMG_PREFIX + '_output_text_' + dest_lang + '.txt', 'w', 'utf-8').write(translated)
+            codecs.open(IMG_PREFIX + '_output_text_' + dest_lang + '.txt', 'a', 'utf-8').write(translated)
         except:
             raise Exception("Exception while writing text file for language " + LANGUAGES[dest_lang] + ".")
-        print("Output successfully written in language " + LANGUAGES[dest_lang] + ".")
+        print("Output successfully written in " + LANGUAGES[dest_lang] + ".")
 
 def farewell():
     print("======================================== Good Bye! =========================================")
@@ -53,9 +57,21 @@ def farewell():
 def main():
     greetings()
     threshold_image()
-    raw_text, text = extract_text()    
+    raw_text, text, no_new_line_text = extract_text()    
     write_original_output(text)
-    write_translated_output(raw_text, "auto")
+    # print(len(no_new_line_text))
+    # doc4 works if we split the text at 1850.
+    # doc4 works for length 1850.
+    # doc4 doesn't work for 1900.
+    # doc4 has length 1983.
+    chopped_text = []
+    begin_index = 0
+    for i in range(0, len(no_new_line_text), 1000):
+        end_index = begin_index + 1000 if begin_index + 1000 < len(no_new_line_text) else len(no_new_line_text)
+        chopped_text.append(no_new_line_text[begin_index:end_index])
+        begin_index += 1000
+    for c in chopped_text:
+        write_translated_output(c, "auto")
     return farewell()
 
 if __name__ == '__main__':
