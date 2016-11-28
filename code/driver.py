@@ -20,8 +20,8 @@ def greetings():
 def threshold_image():
     img = cv2.imread(sys.argv[1], 0)
     img = cv2.medianBlur(img, 5)
-    th = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 7, 2)
-    th = cv2.fastNlMeansDenoising(th, None, 10, 10, 7)
+    th = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
+    th = cv2.fastNlMeansDenoising(th, None, 7, 21, 7)
     cv2.imwrite(IMG_PREFIX + '_thresh.png', th)
 
 def extract_text():
