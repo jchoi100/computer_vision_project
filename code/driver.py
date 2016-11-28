@@ -11,9 +11,11 @@ def main():
 		sys.exit()
 	img = cv2.imread(sys.argv[1], 0)
 	img = cv2.medianBlur(img, 5)
-	th = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 7, 2)
-	cv2.imwrite(sys.argv[1] + '_thresh.png', th)
-	text = image_to_string(Image.open(sys.argv[1] + '_thresh.png'))
+	th = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+	img_name = (sys.argv[1]).split('.')[0]
+	cv2.imwrite(img_name + '_thresh.png', th)
+	print(img_name + '_thresh.png')
+	text = image_to_string(Image.open(img_name + '_thresh.png'))
 	print(text)
 	text_splitted = text.split(" ")
 	with open(sys.argv[1] + '_output_text.txt', 'w') as writer:
