@@ -38,13 +38,13 @@ def write_original_output(text):
     print("Output successfully written in original input language.")
 
 def write_translated_output(raw_text, src):
-    for i in range(len(DEST)):
-        translated = translate(raw_text, DEST[i], "auto").decode('utf-8')
+    for dest_lang in DEST:
+        translated = translate(raw_text, dest_lang, "auto").decode('utf-8')
         try:
-            codecs.open(IMG_PREFIX + '_output_text_' + DEST[i] + '.txt', 'w', 'utf-8').write(translated)
+            codecs.open(IMG_PREFIX + '_output_text_' + dest_lang + '.txt', 'w', 'utf-8').write(translated)
         except:
-            raise Exception("Exception while writing text file for language " + LANGUAGES[DEST[i]] + ".")
-        print("Output successfully written in language " + LANGUAGES[DEST[i]] + ".")
+            raise Exception("Exception while writing text file for language " + LANGUAGES[dest_lang] + ".")
+        print("Output successfully written in language " + LANGUAGES[dest_lang] + ".")
 
 def farewell():
     print("======================================== Good Bye! =========================================")
