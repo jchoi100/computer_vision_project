@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense
@@ -12,7 +12,7 @@ K.set_image_dim_ordering('th')
 
 # fix random seed for reproducibility
 seed = 7
-numpy.random.seed(seed)
+np.random.seed(seed)
 
 # load data
 (X_train, y_train), (X_test, y_test) = mnist.load_data()

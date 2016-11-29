@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense
@@ -7,7 +7,7 @@ from keras.utils import np_utils
 
 # fix random seed for reproducibility
 seed = 7
-numpy.random.seed(seed)
+np.random.seed(seed)
 
 # load data
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -48,17 +48,3 @@ print("Baseline Error: %.2f%%" % (100-scores[1]*100))
 
 predictions = model.predict(X_test, batch_size=32)
 classes = model.predict_classes(X_test, batch_size=32)
-
-# print(predictions)
-# print(classes)
-# print(type(predictions))
-# print(type(classes))
-# print(predictions.shape)
-# print(classes.shape)
-# print(len(predictions))
-# print(len(classes))
-# print(len(X_test))
-
-
-
-

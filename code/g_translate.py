@@ -44,10 +44,6 @@ def translate(to_translate, to_language="auto", from_language="auto"):
     you must shortcut the language you define
     (French = fr, English = en, Spanish = es, etc...)
     if not defined it will detect it or use english by default
-
-    Example:
-    print(translate("salut tu vas bien?", "en"))
-    hello you alright?
     """
     base_link = "http://translate.google.com/m?hl=%s&sl=%s&q=%s"
     if (sys.version_info[0] < 3):

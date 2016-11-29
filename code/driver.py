@@ -20,15 +20,15 @@ def greetings():
 def threshold_image():
     img = cv2.imread(sys.argv[1], 0)
     img = cv2.medianBlur(img, 5)
-    th = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
-    th = cv2.fastNlMeansDenoising(th, None, 7, 21, 7)
-    cv2.imwrite(IMG_PREFIX + '_thresh.png', th)
+    th_img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
+    th_img = cv2.fastNlMeansDenoising(th_img, None, 7, 21, 7)
+    cv2.imwrite(IMG_PREFIX + '_thresh.png', th_img)
 
 def extract_text():
     raw_text = image_to_string(Image.open(IMG_PREFIX + '_thresh.png'))
-    text = raw_text.split(" ")
-    print("Total of " + str(len(text)) + " words detected.")
-    return raw_text, text
+    split_text = raw_text.split(" ")
+    print("Total of " + str(len(split_text)) + " words detected.")
+    return raw_text, split_text
 
 def write_original_output(text):
     with open(IMG_PREFIX + '_output_text.txt', 'w') as writer:
@@ -39,11 +39,11 @@ def write_original_output(text):
             raise Exception("Exception while writing text file for input image " + sys.argv[1] + ".")    
     print("Output successfully written in original input language.")
 
-def write_translated_output(raw_text, src):
+def write_translated_output(text, src):
     chopped_text = []
-    for i in range(0, len(raw_text), 1000):
-        end_index = i + 1000 if i + 1000 < len(raw_text) else len(raw_text)
-        chopped_text.append(raw_text[i:end_index])
+    for i in range(0, len(text), 1000):
+        end_index = i + 1000 if i + 1000 < len(text) else len(text)
+        chopped_text.append(text[i:end_index])
     for dest_lang in DEST:
         for c in chopped_text:
             translated = translate(c, dest_lang, src).decode('utf-8')
@@ -60,8 +60,8 @@ def farewell():
 def main():
     greetings()
     threshold_image()
-    raw_text, text = extract_text()    
-    write_original_output(text)
+    raw_text, split_text = extract_text()    
+    write_original_output(split_text)
     write_translated_output(raw_text, "auto")
     return farewell()
 
