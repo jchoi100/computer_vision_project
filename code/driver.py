@@ -53,17 +53,17 @@ return:
 """
 def extract_text():
     raw_text = image_to_string(Image.open(IMG_PREFIX + '_thresh.png'))
-    split_text = raw_text.split(" ")
-    print("Total of " + str(len(split_text)) + " words detected.")
-    return raw_text, split_text
+    return raw_text
 
 """
 Write output text file for input image.
 """
-def write_original_output(text):
+def write_original_output(raw_text):
+    split_text = raw_text.split(" ")
+    print("Total of " + str(len(split_text)) + " words detected.")
     with open(IMG_PREFIX + '_output_text.txt', 'w') as writer:
         try:
-            for word in text:
+            for word in split_text:
                 writer.write(word + " ")
         except IOError:
             raise Exception("Exception while writing text file for input image "\
@@ -148,8 +148,8 @@ Main driver function for this program.
 def main():
     greetings()
     threshold_image()
-    raw_text, split_text = extract_text()    
-    write_original_output(split_text)
+    raw_text = extract_text()    
+    write_original_output(raw_text)
     write_translated_output(raw_text, "auto")
     check_jhu_document()
     return farewell()
