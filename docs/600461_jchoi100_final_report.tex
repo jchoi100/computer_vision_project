@@ -8,7 +8,7 @@
 \title{EN.600.461 Computer Vision\\Final Project\\Recognizing and Translating Text from Images}
 
 \author{Joon Hyuck (James) Choi\\
-  (Senior Undergraduate)\\
+  \textit{Senior Undergraduate}\\
   The Johns Hopkins University\\
   3400 N Charles Street\\
   Baltimore, MD 21218, USA\\
@@ -56,31 +56,42 @@ Here, we qualitatively discuss OCR results on typed and handwritten input docume
 
 \subsection{Typed Documents}
 
-We ran our code on five document images with different font types and sizes: {\tt cv\textunderscore proj\textunderscore description.png}, {\tt aesop\textunderscore fox.png}, {\tt aesop\textunderscore miller.png}, {\tt aesop\textunderscore goose.png}, {\tt aesop\textunderscore cat.png}. With the exception of {\tt aesop\textunderscore goose.png}, performance on all documents were near-perfect. A sample image is shown in Figure 1.
+We ran our code on five document images with different font types and font sizes. The images were {\tt cv\textunderscore proj\textunderscore description.png}, {\tt aesop\textunderscore fox.png}, {\tt aesop\textunderscore miller.png}, {\tt aesop\textunderscore goose.png}, and {\tt aesop\textunderscore cat.png}.
+
+With the exception of {\tt aesop\textunderscore goose.png}, performance on all documents were near-perfect. A sample image is shown in Figure 1. The reason that {\tt aesop\textunderscore goose.png} did not produce satisfactory results was that the font in the document was extremely thick and bold. Therefore, after preprocessing, the alphabet characters in the thresholded document were hollow with just the edges remaining. Therefore, the OCR algorithm could not recognize any of the characters in this text.
 
 \begin{figure}[t!]
   \centering
   \includegraphics[keepaspectratio, width=0.5\textwidth]{fox.png}
-  \caption{Sample typed document in our dataset}
+  \caption{Sample typed document {\tt aesop\textunderscore fox.png}}
 \end{figure}
 
-We ran our code on additional two document images that were taken under sub-optimal conditions: irregular lighting, partial skew, and/or laminated surfaces. These images were {\tt cv\textunderscore jchoi\textunderscore proposal.png} and {\tt jhu\textunderscore lav\textunderscore notes1.png}. Despite the less optimal environment, our code was able to correctly denoise and threshold the images and gave similar results as before.
+We ran our code on additional two document images that were taken under sub-optimal conditions: irregular lighting, partial skew, and/or glossy surfaces. Moreover, these documents had mixed font types and sizes, and the structure of the document was more complicated than the previous inputs. These images were {\tt cv\textunderscore jchoi\textunderscore proposal.png} and {\tt lav\textunderscore notes1.png}. Despite the less optimal settings, we correctly denoised and thresholded the images and got similar results as before.
 
 \subsection{Handwritten Documents}
 
-\subsection{MNIST Training with Keras}
+We applied our code on photos of handwritten documents. Performance on very neatly written documents ({\tt hand\textunderscore fox.png} and {\tt hand\textunderscore goose.png}) was nowhere close to what we saw for the printed dataset. Moreover, any reasonably neat handwritten documents ({\tt hand\textunderscore miller.png} and {\tt hand\textunderscore cat.png}) showed even poorer performance. Figure 2 shows one of our reasonably neat images {\tt hand\textunderscore cat.png}. Furthermore, our code was not able to detect a single word from document images with much less neat handwriting. Such images were {\tt obama1.png}, {\tt obama2.png}, {\tt obama3.png}, {\tt bush1.png}, {\tt bush2.png}, {\tt clinton1.png}, and {\tt clinton2.png}. Figure 3 shows {\tt obama1.png}.
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[keepaspectratio, width=0.5\textwidth]{cat.png}
+  \caption{Reasonable handwritten doc: {\tt hand\textunderscore cat.png}}
+\end{figure}
 
 \begin{figure}[t!]
   \centering
   \includegraphics[keepaspectratio, width=0.5\textwidth]{obama4.png}
-  \caption{Sample handwritten document in our dataset}
+  \caption{Sample handwritten document: {\tt obama1.png}}
 \end{figure}
 
 
+\section{Conclusion}
 
-\section{Discussion}
+We explored optical character recognition on photographed documents in various settings and formats. We tested with optimal and suboptimal photography settings, with documents using various fonts, and with printed and handwritten documents. For printed documents, we saw highly accurate results for both optimal and suboptimal settings, even if they contained various font sizes and font types. However, we were not able to achieve accurate results with handwritten document photos, disregarding the neatness of the handwriting. For sufficiently small portions of handwritten documents (e.g. a single word or a short sentence), the OCR algorithm was able to produce correct output occasionally. However, even this was not often enough to be considered reliable. 
 
-\section{How to Run the Code}
+Nonetheless, on typed documents, we were able to effectively preprocess the document image and perform OCR on the cleaned data. Moreover, we leveraged the Google Cloud Translation API to translate the document into several different languages. Our short experiment with template matching also deserves future development into a project of its own.
+
+\section*{How to Run the Code}
 
 Please extract {\tt FINAL\textunderscore PROJECT\textunderscore jchoi100.zip} to view and run the code.
 
@@ -88,50 +99,18 @@ Assuming that the user has Python 2.5+, OpenCV, pytesseract, and tesseract insta
 
 {\tt \$python driver.py \{path-to-image-} {\tt file\} \{list of target languages separated by single space\}}\\
 
-\textbf{Sample usage:}
-
-{\tt \$python driver.py data/doc7.png es fr}
+\textbf{Sample usage:} {\tt \$python driver.py data/doc7.png es fr}
 
 performs OCR on {\tt doc7.png}, outputs the thresholded image, the text in the original input language, and the text translated in Spanish and French.
 
+\section*{Saved Output from Experiments}
 
-\begin{itemize}
-\item Left and right margins: 1in
-\item Top margin:1in
-\item Bottom margin: 1in
-\item Column width: 3.15in
-\item Column height: 9in
-\item Gap between columns: 0.2in
-\end{itemize}
-
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|rl|}
-\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
-paper title & 15 pt & bold \\
-author names & 12 pt & bold \\
-author affiliation & 12 pt & \\
-the word ``Abstract'' & 12 pt & bold \\
-section titles & 12 pt & bold \\
-document text & 11 pt  &\\
-abstract text & 10 pt & \\
-captions & 10 pt & \\
-bibliography & 10 pt & \\
-footnotes & 9 pt & \\
-\hline
-\end{tabular}
-\end{center}
-\caption{\label{font-table} Font guide. }
-\end{table}
-
-{\bf Captions}: Provide a caption for every illustration; number each one
-sequentially in the form:  ``Figure 1. Caption of the Figure.'' ``Table 1.
-Caption of the Table.''  Type the captions of the figures and 
-tables below the body, using 10 point text.  
+The output that we created by running our code on all the images in our dataset are saved under {\tt FINAL\textunderscore PROJECT\textunderscore jchoi100/code/data}.
 
 \section*{Acknowledgments}
 
-We thank the python libraries we used for image processing and OCR, the code we referred to for constructing CNNs using {\tt Keras} and making use of the Google Translate API, and MNIST for the handwritten digit dataset.
+We thank the image processing and OCR libraries, the code we referred to for constructing CNNs using {\tt Keras}, and MNIST for the digit dataset.
+
+And thanks to Professor Reiter and the TAs!
 
 \end{document}
