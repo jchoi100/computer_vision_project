@@ -61,7 +61,7 @@ Write output text file for input image.
 def write_original_output(raw_text):
     split_text = raw_text.split(" ")
     print("Total of " + str(len(split_text)) + " words detected.")
-    with open(IMG_PREFIX + '_output_text.txt', 'w') as writer:
+    with open(IMG_PREFIX + '_output.txt', 'w') as writer:
         try:
             for word in split_text:
                 writer.write(word + " ")
@@ -87,7 +87,7 @@ def write_translated_output(text, src):
         for c in chopped_text:
             translated = translate(c, dest_lang, src).decode('utf-8')
             try:
-                codecs.open(IMG_PREFIX + '_output_text_' + dest_lang \
+                codecs.open(IMG_PREFIX + '_output_' + dest_lang \
                             + '.txt', 'a', 'utf-8').write(translated)
             except IOError:
                 raise Exception("Exception while writing text file for language "\
