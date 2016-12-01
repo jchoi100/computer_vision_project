@@ -56,7 +56,15 @@ Here, we qualitatively discuss OCR results on typed and handwritten input docume
 
 \subsection{Typed Documents}
 
-We ran our code on five input document images with different font types and sizes: {\tt comp\textunderscore vis\textunderscore proj\textunderscore description.png}, {\tt jchoi100\textunderscore proposal.png}, {\tt miller\textunderscore and\textunderscore son.png}, {\tt }, {\tt}
+We ran our code on five document images with different font types and sizes: {\tt cv\textunderscore proj\textunderscore description.png}, {\tt aesop\textunderscore fox.png}, {\tt aesop\textunderscore miller.png}, {\tt aesop\textunderscore goose.png}, {\tt aesop\textunderscore cat.png}. With the exception of {\tt aesop\textunderscore goose.png}, performance on all documents were near-perfect. A sample image is shown in Figure 1.
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[keepaspectratio, width=0.5\textwidth]{fox.png}
+  \caption{Sample typed document in our dataset}
+\end{figure}
+
+We ran our code on additional two document images that were taken under sub-optimal conditions: irregular lighting, partial skew, and/or laminated surfaces. These images were {\tt cv\textunderscore jchoi\textunderscore proposal.png} and {\tt jhu\textunderscore lav\textunderscore notes1.png}. Despite the less optimal environment, our code was able to correctly denoise and threshold the images and gave similar results as before.
 
 \subsection{Handwritten Documents}
 
