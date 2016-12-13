@@ -18,7 +18,7 @@ IMG_PREFIX = sys.argv[1][:sys.argv[1].rindex(".")]
 DEST = [sys.argv[i] for i in range(2, len(sys.argv))]
 
 # Johns Hopkins Logo to use in template matching.
-# JHU_LOGO = cv2.imread('data/jhu_logo.png', 0)
+JHU_LOGO = cv2.imread('data/jhu_logo.png', 0)
 
 # dict: {Google Translate API language code : English expression for that language}.
 # Used for stdout pretty print.
