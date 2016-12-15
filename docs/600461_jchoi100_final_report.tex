@@ -19,7 +19,8 @@
 \begin{document}
 \maketitle
 \begin{abstract}
- This work explores optical character recognition (OCR) in photos of typed and handwritten documents. It first explores basic preprocessing of photos of documents using {\tt OpenCV} \footnote{http://opencv.org/} for blurring, thresholding, and denoising. It next discusses the use of {\tt tesseract-ocr} \footnote{https://github.com/tesseract-ocr} to perform OCR. It then discusses the incorporation of the Google Cloud Translation API \footnote{https://cloud.google.com/translate/} to translate the OCR results into different languages. It finally discusses template matching using signatures of three U.S. presidents and the Johns Hopkins University (JHU) logo and on document images. 
+
+\textit{We explore optical character recognition (OCR) in photos of typed and handwritten documents. We first explore basic preprocessing of photos of documents using {\tt OpenCV} \footnote{http://opencv.org/} for blurring, thresholding, and denoising. We then discuss the use of {\tt tesseract-ocr} \footnote{https://github.com/tesseract-ocr} to perform OCR. We discuss the incorporation of the Google Cloud Translation API \footnote{https://cloud.google.com/translate/} to translate the OCR results into different languages. We finally discuss template matching using signatures of three U.S. presidents and the Johns Hopkins University (JHU) logo on document images.}
 \end{abstract}
 
 \section{Introduction}
@@ -34,7 +35,7 @@ We took photos of the final project guidelines for this course, the author's fin
 
 \subsection{Handwritten Documents}
 
-We collected photos of letters written by three U.S. presidents: Barack Obama, George W. Bush, and Bill Clinton. We also wrote portions of the aesop's fables mentioned above by hand with different handwriting and photographed them under different settings. Figure 3 shows one of our reasonably neat images {\tt hand\textunderscore cat.png}, and Figure 4 shows a sample letter written by Preisdent Obama, {\tt obama2.png}.
+We collected photos of letters written by three U.S. presidents: Barack Obama, George W. Bush, and Bill Clinton. We also wrote portions of the aesop's fables mentioned above by hand with varying neatness and photographed them under different settings. Figure 3 shows one of our reasonably neat images {\tt hand\textunderscore cat.png}, and Figure 4 shows a sample letter written by Preisdent Obama, {\tt obama2.png}.
 
 \subsection{Templates}
 
@@ -96,45 +97,45 @@ Please see \textbf{Appendix A} for experiment run outputs on the three sample im
 
 \subsection{OCR on Typed Documents}
 
-We ran our code on seven document images with different font types and font sizes. The images were {\tt cv\textunderscore proj\textunderscore description.png}, {\tt cv\textunderscore jchoi\textunderscore proposal.png}, {\tt aesop\textunderscore fox.png}, {\tt lav\textunderscore notes1.png}, {\tt aesop\textunderscore miller.png}, {\tt aesop\textunderscore goose.png}, and {\tt aesop\textunderscore cat.png}. With the exception of {\tt aesop\textunderscore goose.png}, performance on all documents were nearly perfect. Potential reasons of failure with this particular image are discussed in \textbf{5.2}.
+We ran our code on seven document images with different font types and font sizes. The images were {\tt cv\textunderscore proj\textunderscore description.png}, {\tt cv\textunderscore jchoi\textunderscore proposal.png}, {\tt aesop\textunderscore fox.png}, {\tt lav\textunderscore notes1.png}, {\tt aesop\textunderscore miller.png}, {\tt aesop\textunderscore goose.png}, and {\tt aesop\textunderscore cat.png}. With the exception of {\tt aesop\textunderscore goose.png}, performance on all documents were nearly perfect. Potential reasons for failure with this particular image are discussed in \textbf{5.2}.
 
 \subsection{OCR on Handwritten Documents}
 
-We applied our code on photos of handwritten documents. Performance on very neatly written documents ({\tt hand\textunderscore fox.png} and {\tt hand\textunderscore goose.png}) was nowhere close to what we saw for the printed dataset. Any reasonably neatly handwritten documents ({\tt hand\textunderscore miller.png} and {\tt hand\textunderscore cat.png}) showed even poorer performance.  Moreover, our code was not able to detect a single word from document images with much less neat handwriting. Such images were {\tt obama1.png}, {\tt obama2.png}, {\tt obama3.png}, {\tt bush1.png}, {\tt bush2.png}, {\tt clinton1.png}, and {\tt clinton2.png}.
+We applied our code on photos of handwritten documents. Performance on very neatly written documents ({\tt hand\textunderscore fox.png} and {\tt hand\textunderscore goose.png}) was nowhere close to what we saw for the typed dataset. Any reasonably neatly handwritten documents ({\tt hand\textunderscore miller.png} and {\tt hand\textunderscore cat.png}) showed even poorer performance.  Moreover, our code was not able to detect a single word from document images with much less neat handwriting. Such images were {\tt obama1.png}, {\tt obama2.png}, {\tt obama3.png}, {\tt bush1.png}, {\tt bush2.png}, {\tt clinton1.png}, and {\tt clinton2.png}.
 
 \subsection{Template Matching}
 
-The results for the U.S. presidents' signatures was poor. We then used the JHU logo to determine whether the input document was an official JHU document. This experiment showed more promising results. We discuss potential reasons in \textbf{5.3}.
+The results for the U.S. presidents' signatures was poor. The template matching algorithm could not detect our signature templates in the majority of cases. We also used the JHU logo to determine whether the input document was an official JHU document. This experiment showed more promising results. We discuss potential reasons in \textbf{5.3}.
 
 \section{Discussion}
 
 \subsection{Image Processing}
 
-In running our experiments, we tested with various configurations for denoising and smoothening. Certain parameter configurations worked almost perfectly for some images while they produced disappointing outcome for others. We chose parameter values that performed acceptably well on all images in our dataset. The motivation behind denoising in our work was that document scans usually have many random specs spread throughout the entire image. Such noise can greatly reduce OCR accuracy because an OCR algorithm may confuse a random spec with punctuation marks or associate a spec with an actual character nearby. (e.g. confuse an $l$ and ` with an $i$)
+For our experiments, we tested with various configurations for denoising and smoothening. Certain parameter configurations worked perfectly for some images while they produced disappointing outcome for others. We chose parameter values that performed acceptably well on all images in our dataset. The motivation behind denoising in our work was that document scans have many random specs spread throughout the image. Such noise can greatly reduce OCR accuracy because an OCR algorithm may confuse a random spec with punctuation marks or associate a spec with an actual character nearby. (e.g. confuse an $l$ and ` with an $i$)
 
 \subsection{OCR}
 
-The reason that {\tt aesop\textunderscore goose.png} did not produce satisfactory results was that the font in the document was relatively thick and bold. Therefore, after the preprocessing stage, the alphabet characters in the thresholded document were hollow with just the edges remaining. Therefore, the OCR algorithm could not recognize any of the characters in this text.
+The reason that {\tt aesop\textunderscore goose.png} did not produce satisfactory results was that the font in the document was relatively thick. Therefore, after the preprocessing stage, the alphabet characters in the thresholded document were hollow with just the edges remaining. Therefore, the OCR algorithm could not recognize any of the characters in this text.
 
-The two images {\tt cv\textunderscore jchoi\textunderscore proposal.png} and {\tt lav\textunderscore notes1.png} were taken under sub-optimal conditions: irregular lighting, partial skew, and/or glossy surfaces. Moreover, these documents had mixed font types and sizes, and the structures of the documents were more complicated than the previous inputs. We ran our code on these two document images. Despite the less optimal settings, we correctly denoised and thresholded the images and obtained similar OCR results as before.
+The two images {\tt cv\textunderscore jchoi\textunderscore proposal.png} and {\tt lav\textunderscore notes1.png} were taken under sub-optimal conditions: irregular lighting, slight rotation, and/or glossy surfaces. Moreover, each of these documents had mixed font types and sizes, and the structures of the documents were more complicated than the previous inputs. We ran our code on these two document images. Despite the less optimal settings, we correctly denoised and thresholded the images and obtained similar OCR results as before.
 
 \subsection{Template Matching}
 
-Performance for experiments with U.S. presidents' signatures was poor, and we decided to experiment with an easier, rigid template. Performance on the JHU logo template experiments was better compared to that of the U.S. president signature experiments. The reason that the signature experiment is harder is that the JHU logo is fixed in terms of how it is comprised (e.g. lines, curves, color density) whereas signatures vary each time it is signed (e.g. penstroke width, curvature, ratio of one part of the signature with respect to other parts). Therefore, we conjecture that the ``signature matching task'' bears more resemblance to an object recognition task than an OCR task.
+Performance for experiments with U.S. presidents' signatures was poor, and we decided to experiment with a fixed, rigid template, which is easier to match. Performance on the JHU logo template experiments was better compared to that of the U.S. president signature experiments. The reason that the signature experiment is harder is that the JHU logo is fixed in terms of how it is comprised (e.g. lines, curves, color density) whereas signatures vary each time it is signed (e.g. penstroke width, curvature, ratio of one part of the signature with respect to other parts).
 
-Another reason that the U.S. president experiment did not work well could be that the input documents (\textit{i.e.} letters written by the presidents) were handwritten. The template matching algorithm had more variability to deal with since the entire document contained many likely matching candidates for the given template. This was apparent when we saw the algorithm output locations of random words within the letters as matches to the signature templates.
+Another reason that the U.S. president experiment did not work well could be that the input documents (\textit{i.e.} letters written by the presidents) were handwritten. The template matching algorithm had more variability to deal with since the entire document contained many likely matching candidates for the given signature template. This was apparent when we saw the algorithm output locations of random words within the letters as matches to the signature templates.
 
 \section{Conclusion}
 
-We explored optical character recognition on photographed documents in various settings and formats. We tested with optimal and suboptimal photography settings, experimented with documents with various fonts, and compared performance on typed and handwritten documents. For typed documents, we saw accurate results under both optimal and suboptimal settings even if they contained various font sizes and font types. However, we were not able to achieve accurate results with handwritten document photos, disregarding the neatness of the handwriting. For sufficiently small portions of handwritten documents (e.g. a single word or a short sentence), the OCR algorithm was able to produce correct output occasionally. However, even this was not often enough to be considered reliable. 
+We explored optical character recognition on photographed documents in various settings and formats. We tested with optimal and suboptimal photography settings, experimented with documents with various fonts, and compared performance on typed and handwritten documents. For typed documents, we saw accurate results under both optimal and suboptimal settings even if they contained various font sizes and font types. However, we were not able to achieve accurate results with handwritten document photos, disregarding the neatness of the handwriting. For extremely neatly handwritten documents documents (\textit{i.e.} nearly equal neatness as typed documents), the OCR algorithm was able to produce correct output occasionally. However, even this was not often enough to be considered reliable. 
 
 Nonetheless, on typed documents, we were able to effectively preprocess the document image and perform OCR on the cleaned data. Moreover, we leveraged the Google Cloud Translation API to translate documents into several different languages. Our final experiments on template matching also deserve future development into a project of its own.
 
 \section*{How to Run the Code}
 
-Please refer to our GitHub repository \footnote{https://github.com/jchoi100/computer\textunderscore vision\textunderscore project}. Assuming that the user has installed all required packages and dependencies, run the following command:\\
+Please refer to our GitHub repository for the source code.\footnote{https://github.com/jchoi100/computer\textunderscore vision\textunderscore project} Assuming that the user has installed all required packages and dependencies, run the following command:\\
 
-\textit{\$$>$ python driver.py \{path-to-image-file\} \{list of target languages separated by a space\}}\\
+\textit{\$$>$ python driver.py \{path-to-image-file\} \{list of target languages each separated by a space\}}\\
 
 \textbf{Sample usage:} \textit{python driver.py doc7.png es fr ko}\\
 
@@ -142,14 +143,14 @@ The sample command above performs OCR on {\tt doc7.png}, outputs the thresholded
 
 \section*{Saved Output from Experiments}
 
-Please refer to our GitHub repository.
+Please refer to our GitHub repo for saved output.
 
 \section*{Acknowledgments}
 
-We thank {\tt OpenCV} and {\tt tesseract}, the code we referred to for constructing CNNs using {\tt Keras},  MNIST for the handwritten digit dataset, and Google for the translation API.
+We thank {\tt OpenCV} and {\tt tesseract}, the code we referred to for constructing CNNs using {\tt Keras},  MNIST for the handwritten digit dataset, and Google Cloud for the Translation API.
 
 We also thank Ji Won Shin (\textit{JHU Class of 2019}) for generously providing the author with a Macbook Pro that could run {\tt tesseract}.
 
-And many thanks to Professor Reiter and the TAs for a great semester! Have a great winter break.
+And thanks to Professor Reiter and the TAs for a great semester! Have a great winter break.
 
 \end{document}
