@@ -105,13 +105,19 @@ We applied our code on photos of handwritten documents. Performance on very neat
 
 \subsection{Template Matching}
 
-The results for the U.S. presidents' signatures was poor. The template matching algorithm could not detect our signature templates in the majority of cases. We also used the JHU logo to determine whether the input document was an official JHU document. This experiment showed more promising results. We discuss potential reasons in \textbf{5.3}.
+The results for the U.S. presidents' signatures was poor. The template matching algorithm could not detect our signature templates in the majority of cases. We also used the JHU logo to determine whether the input document was an official JHU document. This experiment showed more promising results. We discuss potential reasons in \textbf{5.3}. Sample output for a successful match is shown in Figure 5. Refer to \textbf{Appendix B} for additional match outputs for the JHU logo experiment.
 
 \section{Discussion}
 
 \subsection{Image Processing}
 
 For our experiments, we tested with various configurations for denoising and smoothening. Certain parameter configurations worked perfectly for some images while they produced disappointing outcome for others. We chose parameter values that performed acceptably well on all images in our dataset. The motivation behind denoising in our work was that document scans have many random specs spread throughout the image. Such noise can greatly reduce OCR accuracy because an OCR algorithm may confuse a random spec with punctuation marks or associate a spec with an actual character nearby. (e.g. confuse an $l$ and ` with an $i$)
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[keepaspectratio, width=0.5\textwidth]{match1.png}
+  \caption{Match in {\tt cv\textunderscore proj\textunderscore description.png} using JHU logo as template. A bounding box is drawn around the match on the right. Notice the white spot in the figure on the left where the JHU logo is matched.}
+\end{figure}
 
 \subsection{OCR}
 
