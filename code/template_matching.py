@@ -6,8 +6,8 @@ input_data = ['obama_letter1.png', 'obama_letter2.png', 'obama_letter3.png', 'ob
 				'gwb_letter1.png', 'gwb_letter2.png', 'bill_clinton_letter1.png', 'bill_clinton_letter2.png']
 
 # for d in input_data:
-img = cv2.imread('data/doc7.png', 0)
-template = cv2.imread('data/jhu_logo.png', 0)
+img = cv2.imread('data/cv_jchoi_proposal.png', 0)
+template = cv2.imread('data/jhu_logo5.png', 0)
 w, h = template.shape[::-1]
 
 method = eval('cv2.TM_CCORR_NORMED')
